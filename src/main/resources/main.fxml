@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.Controller">
+    <left>
+        <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #f0f0f0;">
+            <Label text="Палітра кольорів:" />
+            <ColorPicker fx:id="colorPicker" />
+            <Separator />
+
+        </VBox>
+    </left>
+    <center>
+        <!-- Полотно 500x500 пікселів -->
+        <Canvas fx:id="canvas" width="500" height="500"
+                onMousePressed="#handleMouse" onMouseDragged="#handleMouse"/>
+    </center>
+</BorderPane>
