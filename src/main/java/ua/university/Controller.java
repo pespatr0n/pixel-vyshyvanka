@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -11,6 +12,7 @@ import javafx.stage.FileChooser;
 public class Controller {
     @FXML private Canvas canvas;
     @FXML private ColorPicker colorPicker;
+    @FXML private Slider scaleSlider;
 
     private static final int GRID_SIZE = 50; // 50x50 клітинок
     private static final int CELL_SIZE = 10; // розмір клітинки 10px
@@ -52,7 +54,7 @@ public class Controller {
 
         if (file != null) {
             try {
-                int scale = 20;
+                int scale = (int) scaleSlider.getValue();
                 int imgSize = GRID_SIZE * scale;
 
                 java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(

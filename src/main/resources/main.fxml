@@ -11,8 +11,11 @@
             <Label text="Палітра кольорів:" />
             <ColorPicker fx:id="colorPicker" />
             <Separator />
-            <Button text="Зберегти PNG" onAction="#handleSave"/>
             <Button text="Імпортувати вишивку з PNG" onAction="#handleLoad"/>
+            <Separator />
+            <Button text="Експортувати вишивку в PNG" onAction="#handleSave"/>
+            <Label text="Масштаб експорту (пікселів на клітинку):" wrapText="true"/>
+            <Slider fx:id="scaleSlider" min="1" max="50" value="20" showTickLabels="true" showTickMarks="true" majorTickUnit="10"/>
         </VBox>
     </left>
     <center>
