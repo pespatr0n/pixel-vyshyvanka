@@ -12,7 +12,7 @@
             <ColorPicker fx:id="colorPicker" />
             <Separator />
             <Button text="Зберегти PNG" onAction="#handleSave"/>
-
+            <Button text="Імпортувати вишивку з PNG" onAction="#handleLoad"/>
         </VBox>
     </left>
     <center>

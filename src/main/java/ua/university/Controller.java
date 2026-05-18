@@ -14,7 +14,7 @@ public class Controller {
 
     private static final int GRID_SIZE = 50; // 50x50 клітинок
     private static final int CELL_SIZE = 10; // розмір клітинки 10px
-    private final Color[][] grid = new Color[GRID_SIZE][GRID_SIZE];
+    private Color[][] grid = new Color[GRID_SIZE][GRID_SIZE];
 
     @FXML
     public void initialize() {
@@ -89,7 +89,71 @@ public class Controller {
             }
         }
     }
+    @FXML
+    public void handleLoad() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Зображення PNG (*.png)", "*.png")
+        );
+        java.io.File file = fileChooser.showOpenDialog(canvas.getScene().getWindow());
 
+        if (file != null) {
+            try {
+                java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(file);
+
+                int scaleX = img.getWidth() / GRID_SIZE;
+                int scaleY = img.getHeight() / GRID_SIZE;
+
+                javafx.scene.paint.Color[][] tempGrid = new javafx.scene.paint.Color[GRID_SIZE][GRID_SIZE];
+
+                for (int y = 0; y < GRID_SIZE; y++) {
+                    for (int x = 0; x < GRID_SIZE; x++) {
+                        int startX = x * scaleX;
+                        int startY = y * scaleY;
+
+                        if (startX < img.getWidth() && startY < img.getHeight()) {
+
+                            int referenceArgb = img.getRGB(startX, startY);
+
+                            for (int dy = 0; dy < scaleY; dy++) {
+                                for (int dx = 0; dx < scaleX; dx++) {
+                                    int currentX = startX + dx;
+                                    int currentY = startY + dy;
+
+                                    if (currentX < img.getWidth() && currentY < img.getHeight()) {
+                                        if (img.getRGB(currentX, currentY) != referenceArgb) {
+                                            throw new IllegalArgumentException("Знайдено різні кольори в межах однієї клітинки.");
+                                        }
+                                    }
+                                }
+                            }
+
+                            int a = (referenceArgb >> 24) & 0xff;
+                            int r = (referenceArgb >> 16) & 0xff;
+                            int g = (referenceArgb >> 8) & 0xff;
+                            int b = referenceArgb & 0xff;
+
+                            tempGrid[y][x] = javafx.scene.paint.Color.rgb(r, g, b, a / 255.0);
+                        }
+                    }
+                }
+
+                grid = tempGrid;
+                redraw();
+
+            } catch (IllegalArgumentException e) {
+
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                alert.setTitle("Помилка формату");
+                alert.setHeaderText("Неправильна картинка");
+                alert.setContentText("Цей файл не підходить для редактора вишивки. " + e.getMessage());
+                alert.showAndWait();
+
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void redraw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
