@@ -11,6 +11,7 @@
             <Label text="Палітра кольорів:" />
             <ColorPicker fx:id="colorPicker" />
             <Separator />
+            <Button text="Зберегти PNG" onAction="#handleSave"/>
 
         </VBox>
     </left>
