@@ -34,8 +34,7 @@
         </VBox>
     </left>
     <center>
-        <!-- Полотно 500x500 пікселів -->
-        <Canvas fx:id="canvas" width="500" height="500"
+        <Canvas fx:id="canvas" width="525" height="525"
                 onMousePressed="#handleMouse" onMouseDragged="#handleMouse"/>
     </center>
 </BorderPane>

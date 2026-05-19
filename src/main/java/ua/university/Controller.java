@@ -20,6 +20,7 @@ public class Controller {
 
     private static final int GRID_SIZE = 50; // 50x50 клітинок
     private static final int CELL_SIZE = 10; // розмір клітинки 10px
+    private static final int OFFSET = 25; // Відступ для цифр
     private Color[][] grid = new Color[GRID_SIZE][GRID_SIZE];
 
     @FXML
@@ -39,30 +40,35 @@ public class Controller {
 
     @FXML
     public void handleMouse(MouseEvent event) {
-        int col = (int) (event.getX() / CELL_SIZE);
-        int row = (int) (event.getY() / CELL_SIZE);
+        double mouseX = event.getX() - OFFSET;
+        double mouseY = event.getY() - OFFSET;
 
-        if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE) {
-            Color selectedColor = colorPicker.getValue();
+        if (mouseX >= 0 && mouseY >= 0) {
+            int col = (int) (mouseX / CELL_SIZE);
+            int row = (int) (mouseY / CELL_SIZE);
 
-            grid[row][col] = selectedColor;
+            if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE) {
+                Color selectedColor = colorPicker.getValue();
 
-            if (horizSymCheck.isSelected()) {
-                int mirrorCol = GRID_SIZE - 1 - col;
-                grid[row][mirrorCol] = selectedColor;
+                grid[row][col] = selectedColor;
+
+                if (horizSymCheck.isSelected()) {
+                    int mirrorCol = GRID_SIZE - 1 - col;
+                    grid[row][mirrorCol] = selectedColor;
+                }
+
+                if (vertSymCheck.isSelected()) {
+                    int mirrorRow = GRID_SIZE - 1 - row;
+                    grid[mirrorRow][col] = selectedColor;
+                }
+
+                if (horizSymCheck.isSelected() && vertSymCheck.isSelected()) {
+                    int mirrorCol = GRID_SIZE - 1 - col;
+                    int mirrorRow = GRID_SIZE - 1 - row;
+                    grid[mirrorRow][mirrorCol] = selectedColor;
+                }
+                redraw();
             }
-
-            if (vertSymCheck.isSelected()) {
-                int mirrorRow = GRID_SIZE - 1 - row;
-                grid[mirrorRow][col] = selectedColor;
-            }
-
-            if (horizSymCheck.isSelected() && vertSymCheck.isSelected()) {
-                int mirrorCol = GRID_SIZE - 1 - col;
-                int mirrorRow = GRID_SIZE - 1 - row;
-                grid[mirrorRow][mirrorCol] = selectedColor;
-            }
-            redraw();
         }
     }
 
@@ -205,15 +211,42 @@ public class Controller {
     private void redraw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
                 gc.setFill(grid[row][col]);
-                gc.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                gc.fillRect(col * CELL_SIZE + OFFSET, row * CELL_SIZE + OFFSET, CELL_SIZE, CELL_SIZE);
 
                 gc.setStroke(Color.LIGHTGRAY);
-                gc.strokeRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                gc.strokeRect(col * CELL_SIZE + OFFSET, row * CELL_SIZE + OFFSET, CELL_SIZE, CELL_SIZE);
             }
         }
-    }
 
+        gc.setFill(Color.BLACK);
+        gc.setFont(new javafx.scene.text.Font("Arial", 10));
+
+        for (int i = 10; i <= GRID_SIZE - 10; i += 10) {
+            String text = String.valueOf(i);
+
+            double xPos = (i - 1) * CELL_SIZE + OFFSET + 2;
+            double yPos = OFFSET - 5;
+            gc.fillText(text, xPos, yPos);
+
+            double xPosLeft = 2;
+            double yPosLeft = (i - 1) * CELL_SIZE + OFFSET + 9;
+            gc.fillText(text, xPosLeft, yPosLeft);
+        }
+
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(1.5);
+
+        double centerPos = (GRID_SIZE / 2.0) * CELL_SIZE + OFFSET;
+
+        gc.strokeLine(centerPos, OFFSET, centerPos, OFFSET + GRID_SIZE * CELL_SIZE);
+        gc.strokeLine(OFFSET, centerPos, OFFSET + GRID_SIZE * CELL_SIZE, centerPos);
+
+        gc.setLineWidth(1.0);
+    }
 }
