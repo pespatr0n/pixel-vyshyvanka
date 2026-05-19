@@ -13,6 +13,10 @@ public class Controller {
     @FXML private Canvas canvas;
     @FXML private ColorPicker colorPicker;
     @FXML private Slider scaleSlider;
+    @FXML private javafx.scene.control.CheckBox horizSymCheck;
+    @FXML private javafx.scene.control.CheckBox vertSymCheck;
+    @FXML private javafx.scene.control.TextField fragWidthField;
+    @FXML private javafx.scene.control.TextField fragHeightField;
 
     private static final int GRID_SIZE = 50; // 50x50 клітинок
     private static final int CELL_SIZE = 10; // розмір клітинки 10px
@@ -39,8 +43,50 @@ public class Controller {
         int row = (int) (event.getY() / CELL_SIZE);
 
         if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE) {
-            grid[row][col] = colorPicker.getValue();
+            Color selectedColor = colorPicker.getValue();
+
+            grid[row][col] = selectedColor;
+
+            if (horizSymCheck.isSelected()) {
+                int mirrorCol = GRID_SIZE - 1 - col;
+                grid[row][mirrorCol] = selectedColor;
+            }
+
+            if (vertSymCheck.isSelected()) {
+                int mirrorRow = GRID_SIZE - 1 - row;
+                grid[mirrorRow][col] = selectedColor;
+            }
+
+            if (horizSymCheck.isSelected() && vertSymCheck.isSelected()) {
+                int mirrorCol = GRID_SIZE - 1 - col;
+                int mirrorRow = GRID_SIZE - 1 - row;
+                grid[mirrorRow][mirrorCol] = selectedColor;
+            }
             redraw();
+        }
+    }
+
+    @FXML
+    public void handleDuplicate() {
+        try {
+            int fragW = Integer.parseInt(fragWidthField.getText());
+            int fragH = Integer.parseInt(fragHeightField.getText());
+
+            if (fragW <= 0 || fragH <= 0) return;
+
+            for (int y = 0; y < GRID_SIZE; y++) {
+                for (int x = 0; x < GRID_SIZE; x++) {
+                    grid[y][x] = grid[y % fragH][x % fragW];
+                }
+            }
+            redraw();
+
+        } catch (NumberFormatException e) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+            alert.setTitle("Некоректний ввід");
+            alert.setHeaderText("Помилка розміру фрагмента");
+            alert.setContentText("Будь ласка, введіть цілі числа у поля ширини та висоти.");
+            alert.showAndWait();
         }
     }
 

@@ -5,11 +5,26 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.Controller">
     <left>
         <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #f0f0f0;">
             <Label text="Палітра кольорів:" />
             <ColorPicker fx:id="colorPicker" />
+            <Separator />
+            <Separator />
+            <Label text="Жива симетрія:" />
+            <CheckBox fx:id="horizSymCheck" text="Горизонтальна" />
+            <CheckBox fx:id="vertSymCheck" text="Вертикальна" />
+
+            <Separator />
+            <Label text="Розмір фрагмента для дублювання:" wrapText="true"/>
+            <HBox spacing="5">
+                <TextField fx:id="fragWidthField" text="10" prefWidth="50" promptText="Ширина"/>
+                <TextField fx:id="fragHeightField" text="10" prefWidth="50" promptText="Висота"/>
+            </HBox>
+            <Button text="Дублювати фрагмент" onAction="#handleDuplicate" maxWidth="Infinity"/>
+
             <Separator />
             <Button text="Імпортувати вишивку з PNG" onAction="#handleLoad"/>
             <Separator />
