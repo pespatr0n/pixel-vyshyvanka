@@ -80,11 +80,33 @@ public class Controller {
 
             if (fragW <= 0 || fragH <= 0) return;
 
+            javafx.scene.paint.Color[][] tempGrid = new javafx.scene.paint.Color[GRID_SIZE][GRID_SIZE];
+
+            boolean mirrorX = horizSymCheck.isSelected();
+            boolean mirrorY = vertSymCheck.isSelected();
+
             for (int y = 0; y < GRID_SIZE; y++) {
                 for (int x = 0; x < GRID_SIZE; x++) {
-                    grid[y][x] = grid[y % fragH][x % fragW];
+
+                    int tileX = x / fragW;
+                    int tileY = y / fragH;
+
+                    int localX = x % fragW;
+                    int localY = y % fragH;
+
+                    if (mirrorX && tileX % 2 != 0) {
+                        localX = fragW - 1 - localX;
+                    }
+
+                    if (mirrorY && tileY % 2 != 0) {
+                        localY = fragH - 1 - localY;
+                    }
+
+                    tempGrid[y][x] = grid[localY][localX];
                 }
             }
+
+            grid = tempGrid;
             redraw();
 
         } catch (NumberFormatException e) {

@@ -20,8 +20,8 @@
             <Separator />
             <Label text="Розмір фрагмента для дублювання:" wrapText="true"/>
             <HBox spacing="5">
-                <TextField fx:id="fragWidthField" text="10" prefWidth="50" promptText="Ширина"/>
-                <TextField fx:id="fragHeightField" text="10" prefWidth="50" promptText="Висота"/>
+                <TextField fx:id="fragWidthField" text="25" prefWidth="50" promptText="Ширина"/>
+                <TextField fx:id="fragHeightField" text="25" prefWidth="50" promptText="Висота"/>
             </HBox>
             <Button text="Дублювати фрагмент" onAction="#handleDuplicate" maxWidth="Infinity"/>
 
