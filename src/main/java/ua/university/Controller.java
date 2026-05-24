@@ -18,7 +18,7 @@ public class Controller {
     @FXML private javafx.scene.control.TextField fragWidthField;
     @FXML private javafx.scene.control.TextField fragHeightField;
 
-    private static final int GRID_SIZE = 50; // 50x50 клітинок
+    private static final int GRID_SIZE = 49; // 49x49 клітинок
     private static final int CELL_SIZE = 10; // розмір клітинки 10px
     private static final int OFFSET = 25; // Відступ для цифр
     private Color[][] grid = new Color[GRID_SIZE][GRID_SIZE];
@@ -80,7 +80,7 @@ public class Controller {
 
             if (fragW <= 0 || fragH <= 0) return;
 
-            javafx.scene.paint.Color[][] tempGrid = new javafx.scene.paint.Color[GRID_SIZE][GRID_SIZE];
+            Color[][] tempGrid = new Color[GRID_SIZE][GRID_SIZE];
 
             boolean mirrorX = horizSymCheck.isSelected();
             boolean mirrorY = vertSymCheck.isSelected();
@@ -88,19 +88,19 @@ public class Controller {
             for (int y = 0; y < GRID_SIZE; y++) {
                 for (int x = 0; x < GRID_SIZE; x++) {
 
-                    int tileX = x / fragW;
-                    int tileY = y / fragH;
+                    int srcX = x;
+                    int srcY = y;
 
-                    int localX = x % fragW;
-                    int localY = y % fragH;
-
-                    if (mirrorX && tileX % 2 != 0) {
-                        localX = fragW - 1 - localX;
+                    if (mirrorX && x > GRID_SIZE / 2) {
+                        srcX = GRID_SIZE - 1 - x;
                     }
 
-                    if (mirrorY && tileY % 2 != 0) {
-                        localY = fragH - 1 - localY;
+                    if (mirrorY && y > GRID_SIZE / 2) {
+                        srcY = GRID_SIZE - 1 - y;
                     }
+
+                    int localX = srcX % fragW;
+                    int localY = srcY % fragH;
 
                     tempGrid[y][x] = grid[localY][localX];
                 }
