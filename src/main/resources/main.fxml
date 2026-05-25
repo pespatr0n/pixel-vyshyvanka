@@ -48,6 +48,11 @@
 
             <Separator style="-fx-padding: 2 0;"/>
 
+            <Button text="Очистити полотно" onAction="#handleClear" maxWidth="Infinity" prefHeight="30"
+                    style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 15; -fx-border-width: 2; -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+            <Separator style="-fx-padding: 2 0;"/>
+
             <Button text="Імпортувати з PNG" onAction="#handleLoad" maxWidth="Infinity" prefHeight="30"
                     style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 15; -fx-border-width: 2; -fx-cursor: hand; -fx-font-weight: bold;"/>
 

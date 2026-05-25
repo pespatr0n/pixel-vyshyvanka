@@ -50,6 +50,12 @@ public class Controller {
     }
 
     @FXML
+    public void handleClear() {
+        clearGrid();
+        redraw();
+    }
+
+    @FXML
     public void handleMouse(MouseEvent event) {
         double mouseX = event.getX() - OFFSET;
         double mouseY = event.getY() - OFFSET;
