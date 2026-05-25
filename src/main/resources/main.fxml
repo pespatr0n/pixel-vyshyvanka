@@ -1,42 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.HBox?>
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.Controller"
+            style="-fx-background-image: url('bg.jpg'); -fx-background-size: cover; -fx-background-position: center center;">
+
     <left>
-        <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #f0f0f0;">
-            <Button text="← До головного меню" onAction="#goToMenu" maxWidth="Infinity" style="-fx-background-color: #e0e0e0; -fx-cursor: hand;"/>
-            <Separator />
-            <Label text="Палітра кольорів:" />
-            <ColorPicker fx:id="colorPicker" />
-            <Separator />
-            <Separator />
-            <Label text="Жива симетрія:" />
-            <CheckBox fx:id="horizSymCheck" text="Горизонтальна" />
-            <CheckBox fx:id="vertSymCheck" text="Вертикальна" />
+        <VBox spacing="8" prefWidth="260"
+              style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 15; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 5);">
+            <BorderPane.margin>
+                <Insets top="15" left="15" bottom="15" right="10"/>
+            </BorderPane.margin>
 
-            <Separator />
-            <Label text="Розмір фрагмента для дублювання:" wrapText="true"/>
-            <HBox spacing="5">
-                <TextField fx:id="fragWidthField" text="25" prefWidth="50" promptText="Ширина"/>
-                <TextField fx:id="fragHeightField" text="25" prefWidth="50" promptText="Висота"/>
+            <Button text="← До головного меню" onAction="#goToMenu" maxWidth="Infinity" prefHeight="35"
+                    style="-fx-background-color: #b71c1c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;"/>
+
+            <Separator style="-fx-padding: 2 0;"/>
+
+            <Label text="Палітра кольорів:" textFill="#4a4a4a">
+                <font><Font name="System Bold" size="14"/></font>
+            </Label>
+            <ColorPicker fx:id="colorPicker" maxWidth="Infinity" style="-fx-background-radius: 10;"/>
+
+            <Separator style="-fx-padding: 2 0;"/>
+
+            <Label text="Жива симетрія:" textFill="#4a4a4a">
+                <font><Font name="System Bold" size="14"/></font>
+            </Label>
+            <CheckBox fx:id="horizSymCheck" text="Горизонтальна" textFill="#333333"/>
+            <CheckBox fx:id="vertSymCheck" text="Вертикальна" textFill="#333333"/>
+
+            <Separator style="-fx-padding: 2 0;"/>
+
+            <Label text="Розмір фрагмента:" textFill="#4a4a4a">
+                <font><Font name="System Bold" size="14"/></font>
+            </Label>
+            <HBox spacing="10">
+                <TextField fx:id="fragWidthField" text="25" promptText="Шир." HBox.hgrow="ALWAYS" style="-fx-background-radius: 10;"/>
+                <TextField fx:id="fragHeightField" text="25" promptText="Вис." HBox.hgrow="ALWAYS" style="-fx-background-radius: 10;"/>
             </HBox>
-            <Button text="Дублювати фрагмент" onAction="#handleDuplicate" maxWidth="Infinity"/>
+            <Button text="Дублювати фрагмент" onAction="#handleDuplicate" maxWidth="Infinity" prefHeight="30"
+                    style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 15; -fx-border-width: 2; -fx-cursor: hand; -fx-font-weight: bold;"/>
 
-            <Separator />
-            <Button text="Імпортувати вишивку з PNG" onAction="#handleLoad"/>
-            <Separator />
-            <Button text="Експортувати вишивку в PNG" onAction="#handleSave"/>
-            <Label text="Масштаб експорту (пікселів на клітинку):" wrapText="true"/>
+            <Separator style="-fx-padding: 2 0;"/>
+
+            <Button text="Імпортувати з PNG" onAction="#handleLoad" maxWidth="Infinity" prefHeight="30"
+                    style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 15; -fx-border-width: 2; -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+            <Button text="Експортувати в PNG" onAction="#handleSave" maxWidth="Infinity" prefHeight="30"
+                    style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 15; -fx-border-width: 2; -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+            <Label text="Масштаб експорту:" textFill="#4a4a4a">
+                <font><Font name="System Bold" size="13"/></font>
+            </Label>
             <Slider fx:id="scaleSlider" min="1" max="50" value="20" showTickLabels="true" showTickMarks="true" majorTickUnit="10"/>
         </VBox>
     </left>
+
     <center>
-        <Canvas fx:id="canvas" width="525" height="525"
-                onMousePressed="#handleMouse" onMouseDragged="#handleMouse"/>
+        <StackPane maxWidth="525" maxHeight="525"
+                   style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 5);">
+            <BorderPane.margin>
+                <Insets top="15" left="10" bottom="15" right="20"/>
+            </BorderPane.margin>
+
+            <Canvas fx:id="canvas" width="525" height="525"
+                    onMousePressed="#handleMouse" onMouseDragged="#handleMouse"/>
+        </StackPane>
     </center>
+
 </BorderPane>

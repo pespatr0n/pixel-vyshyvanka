@@ -28,7 +28,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
             Parent root = loader.load();
             if (stage.getScene() == null) {
-                stage.setScene(new Scene(root, 800, 600));
+                stage.setScene(new Scene(root, 900, 650));
             } else {
                 stage.getScene().setRoot(root);
             }
