@@ -26,7 +26,7 @@
         <Button text="Інструкція користувача" onAction="#openInstructions" prefWidth="300" prefHeight="45"
                 style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 25; -fx-border-width: 2; -fx-font-size: 15px; -fx-cursor: hand;"/>
 
-        <Button text="Традиції української вишивки" onAction="#openTraditions" prefWidth="300" prefHeight="45"
+        <Button text="Про традиції української вишивки" onAction="#openTraditions" prefWidth="300" prefHeight="45"
                 style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 25; -fx-border-width: 2; -fx-font-size: 15px; -fx-cursor: hand;"/>
 
         <Button text="Вихід" onAction="#exitApp" prefWidth="300" prefHeight="40"
