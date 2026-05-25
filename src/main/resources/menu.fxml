@@ -5,25 +5,34 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.MenuController"
-      style="-fx-background-image: url('bg.jpg');
-             -fx-background-size: cover;
-             -fx-background-position: center center;
-             -fx-background-repeat: no-repeat;">
-    <padding>
-        <Insets top="50" right="50" bottom="50" left="50"/>
-    </padding>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.MenuController"
+      style="-fx-background-image: url('bg.jpg'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-repeat: no-repeat;">
 
-    <Label text="Піксельна вишивка" textFill="#d32f2f">
-        <font> <Font name="System Bold" size="36"/> </font>
-    </Label>
-    <Label text="Головне меню" textFill="#555555">
-        <font> <Font size="18"/> </font>
-        <padding> <Insets bottom="20"/> </padding>
-    </Label>
+    <VBox alignment="CENTER" spacing="15" maxWidth="450"
+          style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 20; -fx-padding: 40; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 5);">
 
-    <Button text="Перейти до редагування" onAction="#openEditor" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
-    <Button text="Інструкція користувача" onAction="#openInstructions" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
-    <Button text="Традиції української вишивки" onAction="#openTraditions" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
-    <Button text="Вихід" onAction="#exitApp" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
+        <Label text="Піксельна вишивка" textFill="#b71c1c">
+            <font> <Font name="System Bold" size="36"/> </font>
+        </Label>
+
+        <Label text="Головне меню" textFill="#4a4a4a">
+            <font> <Font size="18"/> </font>
+            <padding> <Insets bottom="25"/> </padding>
+        </Label>
+
+        <Button text="Перейти до редагування" onAction="#openEditor" prefWidth="300" prefHeight="50"
+                style="-fx-background-color: #b71c1c; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25; -fx-cursor: hand;"/>
+
+        <Button text="Інструкція користувача" onAction="#openInstructions" prefWidth="300" prefHeight="45"
+                style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 25; -fx-border-width: 2; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+        <Button text="Традиції української вишивки" onAction="#openTraditions" prefWidth="300" prefHeight="45"
+                style="-fx-background-color: transparent; -fx-text-fill: #b71c1c; -fx-border-color: #b71c1c; -fx-border-radius: 25; -fx-border-width: 2; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+        <Button text="Вихід" onAction="#exitApp" prefWidth="300" prefHeight="40"
+                style="-fx-background-color: transparent; -fx-text-fill: #777777; -fx-font-size: 14px; -fx-cursor: hand; -fx-underline: true;">
+            <VBox.margin> <Insets top="10"/> </VBox.margin>
+        </Button>
+
+    </VBox>
 </VBox>
