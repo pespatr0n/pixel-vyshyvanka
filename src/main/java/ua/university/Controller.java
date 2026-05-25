@@ -5,9 +5,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.util.Optional;
 
 public class Controller {
     @FXML private Canvas canvas;
@@ -28,6 +32,13 @@ public class Controller {
         colorPicker.setValue(Color.RED);
         clearGrid();
         redraw();
+        File defaultImage = new File("src/main/resources/andrii.png");
+        loadFromImage(Optional.ofNullable(defaultImage));
+    }
+
+    @FXML
+    public void goToMenu() {
+        Main.setRoot("/menu.fxml");
     }
 
     private void clearGrid() {
@@ -173,9 +184,12 @@ public class Controller {
         );
         java.io.File file = fileChooser.showOpenDialog(canvas.getScene().getWindow());
 
-        if (file != null) {
+        loadFromImage(Optional.ofNullable(file));
+    }
+    private void loadFromImage(Optional<File> file){
+        if (file.isPresent()) {
             try {
-                java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(file);
+                java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(file.get());
 
                 int scaleX = img.getWidth() / GRID_SIZE;
                 int scaleY = img.getHeight() / GRID_SIZE;

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.university.MenuController"
+      style="-fx-background-image: url('bg.jpg');
+             -fx-background-size: cover;
+             -fx-background-position: center center;
+             -fx-background-repeat: no-repeat;">
+    <padding>
+        <Insets top="50" right="50" bottom="50" left="50"/>
+    </padding>
+
+    <Label text="Піксельна вишивка" textFill="#d32f2f">
+        <font> <Font name="System Bold" size="36"/> </font>
+    </Label>
+    <Label text="Головне меню" textFill="#555555">
+        <font> <Font size="18"/> </font>
+        <padding> <Insets bottom="20"/> </padding>
+    </Label>
+
+    <Button text="Перейти до редагування" onAction="#openEditor" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
+    <Button text="Інструкція користувача" onAction="#openInstructions" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
+    <Button text="Традиції української вишивки" onAction="#openTraditions" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
+    <Button text="Вихід" onAction="#exitApp" prefWidth="280" prefHeight="45" style="-fx-font-size: 14px; -fx-cursor: hand;"/>
+</VBox>
