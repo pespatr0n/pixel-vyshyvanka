@@ -23,6 +23,11 @@ public class MenuController {
     }
 
     @FXML
+    private void openSettings() {
+        Main.setRoot("/settings.fxml");
+    }
+
+    @FXML
     private void exitApp() {
         Platform.exit(); // Закриває програму
     }
