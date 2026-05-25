@@ -263,7 +263,7 @@ public class Controller {
         gc.setFill(Color.BLACK);
         gc.setFont(new javafx.scene.text.Font("Arial", 10));
 
-        for (int i = 10; i <= GRID_SIZE - 10; i += 10) {
+        for (int i = 10; i <= GRID_SIZE; i += 10) {
             String text = String.valueOf(i);
 
             double xPos = (i - 1) * CELL_SIZE + OFFSET + 2;
