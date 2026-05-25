@@ -5,10 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 
 public class Main extends Application {
+    public static MediaPlayer mediaPlayer;
     private static Stage stage;
 
     @Override
@@ -20,6 +24,7 @@ public class Main extends Application {
         primaryStage.getIcons().add(icon);
 
         setRoot("/menu.fxml");
+        initMusic();
         primaryStage.show();
     }
 
@@ -33,6 +38,23 @@ public class Main extends Application {
                 stage.getScene().setRoot(root);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initMusic() {
+        try {
+            URL resource = getClass().getResource("/music.mp3"); // Назва твого файлу
+            if (resource != null) {
+                Media sound = new Media(resource.toString());
+                mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Зациклити музику
+                mediaPlayer.setVolume(0.3); // Гучність за замовчуванням (30%)
+                mediaPlayer.play();
+            } else {
+                System.out.println("Файл music.mp3 не знайдено в resources!");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
